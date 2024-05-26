@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Japanese Flashcards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .toggle-button {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .card-container {
+      display: grid;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .hidden {
+      display: none;
+    }
+
+    @media (min-width: 1200px) {
+      .card-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    @media (min-width: 900px) and (max-width: 1199px) {
+      .card-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (min-width: 600px) && (max-width: 899px) {
+      .card-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 599px) {
+      .card-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-button" onclick="toggleSequence()">Show Japanese First</button>
+  <div class="card-container">
+    <div class="card" onclick="reveal(this)">
+      <div class="japanese">月曜日</div>
+      <div class="katakana hidden">Getsuyōbi</div>
+      <div class="chinese hidden">星期一</div>
+    </div>
+    <div class="card" onclick="reveal(this)">
+      <div class="japanese">火曜日</div>
+      <div class="katakana hidden">Kayōbi</div>
+      <div class="chinese hidden">星期二</div>
+    </div>    
+  </div>
+  <script>
+    let showJapaneseFirst = false;
+
+    function toggleSequence() {
+      showJapaneseFirst = !showJapaneseFirst;
+      document.querySelectorAll('.card').forEach(card => {
+        card.classList.remove('revealed');
+        if (showJapaneseFirst) {
+          card.querySelector('.japanese').classList.remove('hidden');
+          card.querySelector('.katakana').classList.remove('hidden');
+          card.querySelector('.chinese').classList.add('hidden');
+        } else {
+          card.querySelector('.japanese').classList.add('hidden');
+          card.querySelector('.katakana').classList.add('hidden');
+          card.querySelector('.chinese').classList.remove('hidden');
+        }
+      });
+      document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show Chinese First' : 'Show Japanese First';
+    }
+
+    function reveal(card) {
+      if (!card.classList.contains('revealed')) {
+        card.classList.add('revealed');
+        if (showJapaneseFirst) {
+          card.querySelector('.chinese').classList.remove('hidden');
+          const chineseText = card.querySelector('.chinese').textContent;
+          speakText(chineseText, 'zh-CN');
+        } else {
+          card.querySelector('.japanese').classList.remove('hidden');
+          card.querySelector('.katakana').classList.remove('hidden');
+          const japaneseText = card.querySelector('.japanese').textContent;
+          speakText(japaneseText, 'ja-JP');
+        }
+      }
+    }
+
+    function speakText(text, lang) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
