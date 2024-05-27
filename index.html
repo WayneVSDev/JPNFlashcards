@@ -55,7 +55,7 @@
         grid-template-columns: repeat(3, 1fr);
       }
     }
-    @media (min-width: 600px) && (max-width: 899px) {
+    @media (min-width: 600px) and (max-width: 899px) {
       .card-container {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -71,77 +71,81 @@
   <button class="toggle-button" onclick="toggleSequence()">Show Japanese First</button>
   <div class="card-container">
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">月曜日</div>
+      <div class="chinese">星期一</div>
+      <div class="English hidden">Monday</div>
+      <div class="japanese hidden">月曜日</div>
       <div class="katakana hidden">Getsuyōbi</div>
-      <div class="chinese hidden">星期一</div>
     </div>
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">火曜日</div>
+      <div class="chinese">星期二</div>
+      <div class="English hidden">Tuesday</div>
+      <div class="japanese hidden">火曜日</div>
       <div class="katakana hidden">Kayōbi</div>
-      <div class="chinese hidden">星期二</div>
     </div>
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">水曜日</div>
+      <div class="chinese">星期三</div>
+      <div class="English hidden">Wednesday</div>
+      <div class="japanese hidden">水曜日</div>
       <div class="katakana hidden">Suiyōbi</div>
-      <div class="chinese hidden">星期三</div>
     </div>
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">木曜日</div>
+      <div class="chinese">星期四</div>
+      <div class="English hidden">Thursday</div>
+      <div class="japanese hidden">木曜日</div>
       <div class="katakana hidden">Mokuyōbi</div>
-      <div class="chinese hidden">星期四</div>
     </div>
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">金曜日</div>
+      <div class="chinese">星期五</div>
+      <div class="English hidden">Friday</div>
+      <div class="japanese hidden">金曜日</div>
       <div class="katakana hidden">Kin'yōbi</div>
-      <div class="chinese hidden">星期五</div>
     </div>
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">土曜日</div>
+      <div class="chinese">星期六</div>
+      <div class="English hidden">Saturday</div>
+      <div class="japanese hidden">土曜日</div>
       <div class="katakana hidden">Doyōbi</div>
-      <div class="chinese hidden">星期六</div>
     </div>
     <div class="card" onclick="reveal(this)">
-      <div class="japanese">日曜日</div>
+      <div class="chinese">星期日</div>
+      <div class="English hidden">Sunday</div>
+      <div class="japanese hidden">日曜日</div>
       <div class="katakana hidden">Nichiyōbi</div>
-      <div class="chinese hidden">星期日</div>
     </div>
   </div>
   <script>
     let showJapaneseFirst = false;
 
+
     function toggleSequence() {
       showJapaneseFirst = !showJapaneseFirst;
       document.querySelectorAll('.card').forEach(card => {
         card.classList.remove('revealed');
-        if (showJapaneseFirst) {
-          card.querySelector('.japanese').classList.remove('hidden');
-          card.querySelector('.katakana').classList.remove('hidden');
-          card.querySelector('.chinese').classList.add('hidden');
-        } else {
-          card.querySelector('.japanese').classList.add('hidden');
-          card.querySelector('.katakana').classList.add('hidden');
-          card.querySelector('.chinese').classList.remove('hidden');
-        }
+        card.querySelector('.English').classList.add('hidden');
+        card.querySelector('.japanese').classList.add('hidden');
+        card.querySelector('.katakana').classList.add('hidden');
       });
-      document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show Chinese First' : 'Show Japanese First';
+      document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show English First' : 'Show Japanese First';
     }
+
 
     function reveal(card) {
       if (!card.classList.contains('revealed')) {
         card.classList.add('revealed');
         if (showJapaneseFirst) {
-          card.querySelector('.chinese').classList.remove('hidden');
-          const chineseText = card.querySelector('.chinese').textContent;
-          speakText(chineseText, 'zh-CN');
-        } else {
           card.querySelector('.japanese').classList.remove('hidden');
           card.querySelector('.katakana').classList.remove('hidden');
           const japaneseText = card.querySelector('.japanese').textContent;
           speakText(japaneseText, 'ja-JP');
+        } else {
+          card.querySelector('.English').classList.remove('hidden');
+          const englishText = card.querySelector('.English').textContent;
+          speakText(englishText, 'en-US');
         }
       }
     }
 
+    
     function speakText(text, lang) {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = lang;
