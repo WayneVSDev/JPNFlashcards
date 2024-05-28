@@ -3,33 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Japanese Flashcards</title>
+  <title>Language Flashcards</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Open Sans', Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
-      background-color: #f0f0f0;
+      background-color: #f4f7f6;
     }
     .toggle-button {
       margin-bottom: 20px;
       padding: 10px 20px;
       font-size: 1em;
       cursor: pointer;
+      background-color: #8e44ad;
+      color: white;
+      border: none;
+      border-radius: 4px;
     }
     .card-container {
       display: grid;
       gap: 20px;
       width: 100%;
       max-width: 1200px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
     }
     .card {
       background-color: #fff;
-      border: 1px solid #ddd;
+      border: none;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 20px;
       text-align: center;
       cursor: pointer;
@@ -37,8 +42,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      /* Add a background color */
-      background-color: #fdebd0;
+      background: linear-gradient(145deg, #fdebd0, #f4d03f);
     }
     .card:hover {
       transform: scale(1.05);
@@ -46,265 +50,254 @@
     .hidden {
       display: none;
     }
-
-    @media (min-width: 1200px) {
-      .card-container {
-        grid-template-columns: repeat(4, 1fr);
-      }
+    .chinese {
+      font-weight: bold;
+      color: #34495e;
+      margin-bottom: 10px;
     }
-    @media (min-width: 900px) and (max-width: 1199px) {
-      .card-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    @media (min-width: 600px) and (max-width: 899px) {
-      .card-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 599px) {
-      .card-container {
-        grid-template-columns: 1fr;
-      }
+    .English, .japanese, .katakana {
+      font-weight: normal;
+      color: #7f8c8d;
     }
   </style>
 </head>
+
 <body>
-  <button class="toggle-button" onclick="toggleSequence()">Show Japanese First</button>
-  <div class="card-container">
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期一</div>
-      <div class="English hidden">Monday</div>
-      <div class="japanese hidden">月曜日</div>
-      <div class="katakana hidden">Getsuyōbi</div>
-    </div>
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期二</div>
-      <div class="English hidden">Tuesday</div>
-      <div class="japanese hidden">火曜日</div>
-      <div class="katakana hidden">Kayōbi</div>
-    </div>
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期三</div>
-      <div class="English hidden">Wednesday</div>
-      <div class="japanese hidden">水曜日</div>
-      <div class="katakana hidden">Suiyōbi</div>
-    </div>
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期四</div>
-      <div class="English hidden">Thursday</div>
-      <div class="japanese hidden">木曜日</div>
-      <div class="katakana hidden">Mokuyōbi</div>
-    </div>
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期五</div>
-      <div class="English hidden">Friday</div>
-      <div class="japanese hidden">金曜日</div>
-      <div class="katakana hidden">Kin'yōbi</div>
-    </div>
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期六</div>
-      <div class="English hidden">Saturday</div>
-      <div class="japanese hidden">土曜日</div>
-      <div class="katakana hidden">Doyōbi</div>
-    </div>
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">星期日</div>
-      <div class="English hidden">Sunday</div>
-      <div class="japanese hidden">日曜日</div>
-      <div class="katakana hidden">Nichiyōbi</div>
-    </div>
-
-
-
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">什么</div>
-      <div class="English hidden">What</div>
-      <div class="japanese hidden">何</div>
-      <div class="katakana hidden">Nani</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">不要放弃</div>
-      <div class="English hidden">Never give up</div>
-      <div class="japanese hidden">諦めないで</div>
-      <div class="katakana hidden">Akiramenaide</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">等一下</div>
-      <div class="English hidden">Wait a moment</div>
-      <div class="japanese hidden">ちょっと待って</div>
-      <div class="katakana hidden">Chotto matte</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">太好了</div>
-      <div class="English hidden">Thank goodness</div>
-      <div class="japanese hidden">よかった</div>
-      <div class="katakana hidden">Yokatta</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">明白了</div>
-      <div class="English hidden">Roger, understood</div>
-      <div class="japanese hidden">了解</div>
-      <div class="katakana hidden">Ryoukai</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">加油</div>
-      <div class="English hidden">Good luck</div>
-      <div class="japanese hidden">頑張って</div>
-      <div class="katakana hidden">Ganbatte</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">太棒了</div>
-      <div class="English hidden">Awesome</div>
-      <div class="japanese hidden">すごい</div>
-      <div class="katakana hidden">Sugoi</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">早安</div>
-      <div class="English hidden">Good morning</div>
-      <div class="japanese hidden">おはようございます</div>
-      <div class="katakana hidden">Ohayō gozaimasu</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">晚安</div>
-      <div class="English hidden">Good night</div>
-      <div class="japanese hidden">おやすみなさい</div>
-      <div class="katakana hidden">Oyasuminasai</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">再见</div>
-      <div class="English hidden">Goodbye</div>
-      <div class="japanese hidden">さようなら</div>
-      <div class="katakana hidden">Sayōnara</div>
-    </div>
-
-
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">真的吗</div>
-      <div class="English hidden">Really</div>
-      <div class="japanese hidden">まじ</div>
-      <div class="katakana hidden">Maji</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">小心</div>
-      <div class="English hidden">Take care</div>
-      <div class="japanese hidden">気を付けて</div>
-      <div class="katakana hidden">Ki o tsukete</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">情人</div>
-      <div class="English hidden">Lover</div>
-      <div class="japanese hidden">恋人</div>
-      <div class="katakana hidden">Koibito</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">怪物</div>
-      <div class="English hidden">Monster</div>
-      <div class="japanese hidden">化物</div>
-      <div class="katakana hidden">Bakemono</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">力量</div>
-      <div class="English hidden">Strength</div>
-      <div class="japanese hidden">力</div>
-      <div class="katakana hidden">Chikara</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">大丈夫</div>
-      <div class="English hidden">Fine, okay</div>
-      <div class="japanese hidden">大丈夫</div>
-      <div class="katakana hidden">Daijoubu</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">因此</div>
-      <div class="English hidden">Therefore</div>
-      <div class="japanese hidden">だから</div>
-      <div class="katakana hidden">Dakara</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">嘿</div>
-      <div class="English hidden">Hey</div>
-      <div class="japanese hidden">ほら</div>
-      <div class="katakana hidden">Hora</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">美人</div>
-      <div class="English hidden">Beauty</div>
-      <div class="japanese hidden">美人</div>
-      <div class="katakana hidden">Bijin</div>
-    </div>
-    
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">没什么</div>
-      <div class="English hidden">It's nothing</div>
-      <div class="japanese hidden">別に</div>
-      <div class="katakana hidden">Betsu Ni</div>
-    </div>
-
-    <div class="card" onclick="reveal(this)">
-      <div class="chinese">我饿了</div>
-      <div class="English hidden">I'm hungry</div>
-      <div class="japanese hidden">お腹が空きました</div>
-      <div class="katakana hidden">Onaka ga akimashita</div>
-    </div>
-  </div>
+    <button class="toggle-button" onclick="toggleSequence()">Show Japanese First</button>
+    <div class="card-container">
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期一</div>
+        <div class="English hidden">Monday</div>
+        <div class="japanese hidden">月曜日</div>
+        <div class="katakana hidden">Getsuyōbi</div>
+      </div>
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期二</div>
+        <div class="English hidden">Tuesday</div>
+        <div class="japanese hidden">火曜日</div>
+        <div class="katakana hidden">Kayōbi</div>
+      </div>
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期三</div>
+        <div class="English hidden">Wednesday</div>
+        <div class="japanese hidden">水曜日</div>
+        <div class="katakana hidden">Suiyōbi</div>
+      </div>
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期四</div>
+        <div class="English hidden">Thursday</div>
+        <div class="japanese hidden">木曜日</div>
+        <div class="katakana hidden">Mokuyōbi</div>
+      </div>
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期五</div>
+        <div class="English hidden">Friday</div>
+        <div class="japanese hidden">金曜日</div>
+        <div class="katakana hidden">Kin'yōbi</div>
+      </div>
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期六</div>
+        <div class="English hidden">Saturday</div>
+        <div class="japanese hidden">土曜日</div>
+        <div class="katakana hidden">Doyōbi</div>
+      </div>
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">星期日</div>
+        <div class="English hidden">Sunday</div>
+        <div class="japanese hidden">日曜日</div>
+        <div class="katakana hidden">Nichiyōbi</div>
+      </div>
   
-
-  <script>
-    let showJapaneseFirst = false;
-
-
-    function toggleSequence() {
-      showJapaneseFirst = !showJapaneseFirst;
-      document.querySelectorAll('.card').forEach(card => {
-        card.classList.remove('revealed');
-        card.querySelector('.English').classList.add('hidden');
-        card.querySelector('.japanese').classList.add('hidden');
-        card.querySelector('.katakana').classList.add('hidden');
-      });
-      document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show English First' : 'Show Japanese First';
-    }
-
-
-    function reveal(card) {
-      if (!card.classList.contains('revealed')) {
-        card.classList.add('revealed');
-        if (showJapaneseFirst) {
-          card.querySelector('.japanese').classList.remove('hidden');
-          card.querySelector('.katakana').classList.remove('hidden');
-          const japaneseText = card.querySelector('.japanese').textContent;
-          speakText(japaneseText, 'ja-JP');
-        } else {
-          card.querySelector('.English').classList.remove('hidden');
-          const englishText = card.querySelector('.English').textContent;
-          speakText(englishText, 'en-US');
+  
+  
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">什么</div>
+        <div class="English hidden">What</div>
+        <div class="japanese hidden">何</div>
+        <div class="katakana hidden">Nani</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">不要放弃</div>
+        <div class="English hidden">Never give up</div>
+        <div class="japanese hidden">諦めないで</div>
+        <div class="katakana hidden">Akiramenaide</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">等一下</div>
+        <div class="English hidden">Wait a moment</div>
+        <div class="japanese hidden">ちょっと待って</div>
+        <div class="katakana hidden">Chotto matte</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">太好了</div>
+        <div class="English hidden">Thank goodness</div>
+        <div class="japanese hidden">よかった</div>
+        <div class="katakana hidden">Yokatta</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">明白了</div>
+        <div class="English hidden">Roger, understood</div>
+        <div class="japanese hidden">了解</div>
+        <div class="katakana hidden">Ryoukai</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">加油</div>
+        <div class="English hidden">Good luck</div>
+        <div class="japanese hidden">頑張って</div>
+        <div class="katakana hidden">Ganbatte</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">太棒了</div>
+        <div class="English hidden">Awesome</div>
+        <div class="japanese hidden">すごい</div>
+        <div class="katakana hidden">Sugoi</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">早安</div>
+        <div class="English hidden">Good morning</div>
+        <div class="japanese hidden">おはようございます</div>
+        <div class="katakana hidden">Ohayō gozaimasu</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">晚安</div>
+        <div class="English hidden">Good night</div>
+        <div class="japanese hidden">おやすみなさい</div>
+        <div class="katakana hidden">Oyasuminasai</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">再见</div>
+        <div class="English hidden">Goodbye</div>
+        <div class="japanese hidden">さようなら</div>
+        <div class="katakana hidden">Sayōnara</div>
+      </div>
+  
+  
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">真的吗</div>
+        <div class="English hidden">Really</div>
+        <div class="japanese hidden">まじ</div>
+        <div class="katakana hidden">Maji</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">小心</div>
+        <div class="English hidden">Take care</div>
+        <div class="japanese hidden">気を付けて</div>
+        <div class="katakana hidden">Ki o tsukete</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">情人</div>
+        <div class="English hidden">Lover</div>
+        <div class="japanese hidden">恋人</div>
+        <div class="katakana hidden">Koibito</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">怪物</div>
+        <div class="English hidden">Monster</div>
+        <div class="japanese hidden">化物</div>
+        <div class="katakana hidden">Bakemono</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">力量</div>
+        <div class="English hidden">Strength</div>
+        <div class="japanese hidden">力</div>
+        <div class="katakana hidden">Chikara</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">大丈夫</div>
+        <div class="English hidden">Fine, okay</div>
+        <div class="japanese hidden">大丈夫</div>
+        <div class="katakana hidden">Daijoubu</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">因此</div>
+        <div class="English hidden">Therefore</div>
+        <div class="japanese hidden">だから</div>
+        <div class="katakana hidden">Dakara</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">嘿</div>
+        <div class="English hidden">Hey</div>
+        <div class="japanese hidden">ほら</div>
+        <div class="katakana hidden">Hora</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">美人</div>
+        <div class="English hidden">Beauty</div>
+        <div class="japanese hidden">美人</div>
+        <div class="katakana hidden">Bijin</div>
+      </div>
+      
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">没什么</div>
+        <div class="English hidden">It's nothing</div>
+        <div class="japanese hidden">別に</div>
+        <div class="katakana hidden">Betsu Ni</div>
+      </div>
+  
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">我饿了</div>
+        <div class="English hidden">I'm hungry</div>
+        <div class="japanese hidden">お腹が空きました</div>
+        <div class="katakana hidden">Onaka ga akimashita</div>
+      </div>
+    </div>
+    
+  
+    <script>
+      let showJapaneseFirst = false;
+  
+  
+      function toggleSequence() {
+        showJapaneseFirst = !showJapaneseFirst;
+        document.querySelectorAll('.card').forEach(card => {
+          card.classList.remove('revealed');
+          card.querySelector('.English').classList.add('hidden');
+          card.querySelector('.japanese').classList.add('hidden');
+          card.querySelector('.katakana').classList.add('hidden');
+        });
+        document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show English First' : 'Show Japanese First';
+      }
+  
+  
+      function reveal(card) {
+        if (!card.classList.contains('revealed')) {
+          card.classList.add('revealed');
+          if (showJapaneseFirst) {
+            card.querySelector('.japanese').classList.remove('hidden');
+            card.querySelector('.katakana').classList.remove('hidden');
+            const japaneseText = card.querySelector('.japanese').textContent;
+            speakText(japaneseText, 'ja-JP');
+          } else {
+            card.querySelector('.English').classList.remove('hidden');
+            const englishText = card.querySelector('.English').textContent;
+            speakText(englishText, 'en-US');
+          }
         }
       }
-    }
-
-
-    function speakText(text, lang) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = lang;
-      window.speechSynthesis.speak(utterance);
-    }
-  </script>
-</body>
+  
+  
+      function speakText(text, lang) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        window.speechSynthesis.speak(utterance);
+      }
+    </script>
+  </body>
 </html>
