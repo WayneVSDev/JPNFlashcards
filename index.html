@@ -306,6 +306,12 @@
             speakText(englishText, 'en-US');
           }
         }
+        else{
+          card.classList.remove('revealed');
+          card.querySelector('.English').classList.add('hidden');
+          card.querySelector('.japanese').classList.add('hidden');
+          card.querySelector('.katakana').classList.add('hidden');
+        }        
       }
   
   
