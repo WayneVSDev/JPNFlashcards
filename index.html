@@ -139,10 +139,10 @@
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">明白了</div>
-        <div class="English hidden">Roger, understood</div>
-        <div class="japanese hidden">了解</div>
-        <div class="katakana hidden">Ryoukai</div>
+        <div class="chinese">好的，请</div>
+        <div class="English hidden">Yes, please</div>
+        <div class="japanese hidden">はい、お願いします</div>
+        <div class="katakana hidden">ハイ、オネガイシマス</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
@@ -196,52 +196,52 @@
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">情人</div>
-        <div class="English hidden">Lover</div>
-        <div class="japanese hidden">恋人</div>
-        <div class="katakana hidden">Koibito</div>
+        <div class="chinese">谢谢</div>
+        <div class="English hidden">Thank you</div>
+        <div class="japanese hidden">ありがとうござました</div>
+        <div class="katakana hidden">アリガトウゴザイマシタ</div>
+      </div>
+
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">对不起</div>
+        <div class="English hidden">Excuse me</div>
+        <div class="japanese hidden">すみません</div>
+        <div class="katakana hidden">スミマセン</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">怪物</div>
-        <div class="English hidden">Monster</div>
-        <div class="japanese hidden">化物</div>
-        <div class="katakana hidden">Bakemono</div>
+        <div class="chinese">好的，明白了</div>
+        <div class="English hidden">Yes, I understand</div>
+        <div class="japanese hidden">はい、わかりました</div>
+        <div class="katakana hidden">ハイ、ワカリマシタ</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">力量</div>
-        <div class="English hidden">Strength</div>
-        <div class="japanese hidden">力</div>
-        <div class="katakana hidden">Chikara</div>
+        <div class="chinese">没问题</div>
+        <div class="English hidden">No problem</div>
+        <div class="japanese hidden">大丈夫ですか</div>
+        <div class="katakana hidden">ダイジョウブデス</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">大丈夫</div>
-        <div class="English hidden">Fine, okay</div>
-        <div class="japanese hidden">大丈夫</div>
-        <div class="katakana hidden">Daijoubu</div>
+        <div class="chinese">初次见面</div>
+        <div class="English hidden">Nice to meet you</div>
+        <div class="japanese hidden">はじめまして</div>
+        <div class="katakana hidden">ハジメマシテ</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">因此</div>
-        <div class="English hidden">Therefore</div>
-        <div class="japanese hidden">だから</div>
-        <div class="katakana hidden">Dakara</div>
+        <div class="chinese">好吃</div>
+        <div class="English hidden">Delicious</div>
+        <div class="japanese hidden">おいしい</div>
+        <div class="katakana hidden">オイシイ</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
-        <div class="chinese">嘿</div>
-        <div class="English hidden">Hey</div>
-        <div class="japanese hidden">ほら</div>
-        <div class="katakana hidden">Hora</div>
-      </div>
-      
-      <div class="card" onclick="reveal(this)">
-        <div class="chinese">美人</div>
-        <div class="English hidden">Beauty</div>
-        <div class="japanese hidden">美人</div>
-        <div class="katakana hidden">Bijin</div>
+        <div class="chinese">多少錢</div>
+        <div class="English hidden">How much</div>
+        <div class="japanese hidden">いくらですか</div>
+        <div class="katakana hidden">イクラデスカ</div>
       </div>
       
       <div class="card" onclick="reveal(this)">
@@ -257,6 +257,21 @@
         <div class="japanese hidden">お腹が空きました</div>
         <div class="katakana hidden">Onaka ga akimashita</div>
       </div>
+
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">可以吗</div>
+        <div class="English hidden">Is it okay</div>
+        <div class="japanese hidden">いいですか</div>
+        <div class="katakana hidden">イイデスカ</div>
+      </div>      
+
+      <div class="card" onclick="reveal(this)">
+        <div class="chinese">欢迎光临</div>
+        <div class="English hidden">Welcome</div>
+        <div class="japanese hidden">いらっしゃいませ</div>
+        <div class="katakana hidden">イラッシャイマセ</div>
+      </div>
+
     </div>
     
   
@@ -279,6 +294,7 @@
       function reveal(card) {
         if (!card.classList.contains('revealed')) {
           card.classList.add('revealed');
+          speakText(card.querySelector('.chinese').textContent, 'zh-CN');
           if (showJapaneseFirst) {
             card.querySelector('.japanese').classList.remove('hidden');
             card.querySelector('.katakana').classList.remove('hidden');
