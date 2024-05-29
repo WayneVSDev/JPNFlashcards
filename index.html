@@ -63,7 +63,7 @@
 </head>
 
 <body>
-    <button class="toggle-button" onclick="toggleSequence()">Show Japanese First</button>
+    <button class="toggle-button" onclick="toggleSequence()">Show Japanese</button>
     <div class="card-container">
       <div class="card" onclick="reveal(this)">
         <div class="chinese">星期一</div>
@@ -287,7 +287,7 @@
           card.querySelector('.japanese').classList.add('hidden');
           card.querySelector('.katakana').classList.add('hidden');
         });
-        document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show English First' : 'Show Japanese First';
+        document.querySelector('.toggle-button').textContent = showJapaneseFirst ? 'Show English' : 'Show Japanese';
       }
   
   
