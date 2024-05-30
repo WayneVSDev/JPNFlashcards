@@ -63,7 +63,7 @@
 </head>
 
 <body>
-    <button class="switch-button" onclick="switchLanguage()">Show English (English => Japanese => French)</button>
+    <button class="switch-button" onclick="switchLanguage()"><b style="color: yellow">English</b> => Japanese => French</button>
     <div class="card-container">
       <div class="card" onclick="reveal(this)">
         <div class="chinese">星期一</div>
@@ -314,13 +314,16 @@
         const cards = document.querySelectorAll(".card");
 
         const languages = ['english', 'japanese', 'french'];
+        const buttonTexts = [
+          '<b style="color: yellow">English</b> => Japanese => French', 
+          'English => <b style="color: yellow">Japanese</b> => French', 
+          'English => Japanese => <b style="color: yellow">French</b>'];
+
         const currentIndex = languages.indexOf(currentLanguage);
         const newIndex = (currentIndex + 1) % languages.length;
         currentLanguage = languages[newIndex];
 
-        // Update current language
-        button.textContent = `Show ${currentLanguage} (English => Japanese => French)`;
-
+        button.innerHTML = buttonTexts[newIndex];
         document.querySelectorAll('.card').forEach(card => {
           card.classList.remove('revealed');
           card.querySelector('.english').classList.add('hidden');
@@ -328,8 +331,6 @@
           card.querySelector('.katakana').classList.add('hidden');
           card.querySelector('.french').classList.add('hidden'); // Hide French as well
         });
-
-        document.querySelector('.toggle-button').textContent = `Show ${currentLanguage === 'chinese' ? 'English' : currentLanguage === 'english' ? 'French' : 'Chinese'} First`;
       }
 
       function reveal(card) {
